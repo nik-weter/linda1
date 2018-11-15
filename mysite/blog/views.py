@@ -30,8 +30,9 @@ def post_detail(request, year, month, day, post):
             new_comment.save()
     else:
         comment_form = CommentForm()
+        new_comment = False
 
-    return render(request, 'blog/post/detail.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+    return render(request, 'blog/post/detail.html', {'post': post, 'comments': comments, 'comment_form': comment_form, 'new_comment': new_comment})
 
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id, status='published')
