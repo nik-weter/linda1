@@ -6,6 +6,10 @@ from taggit.managers import TaggableManager
 
 
 # Create your models here.
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return  super(PublishedManager, self).get_queryset().filter(status='published')
+
 class Post(models.Model):
     STATUS_CHOISES = (
         ('draft', 'Draft'),
@@ -20,6 +24,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOISES, default='draft')
 
+    objects = models.Manager()
+    published = PublishedManager()
 
     tags = TaggableManager()
 

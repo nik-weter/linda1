@@ -8,7 +8,7 @@ from django.db.models   import Count
 # Create your views here.
 
 def post_list(request, tag_slug=None):
-    object_list = Post.objects.filter(status='published')
+    object_list = Post.published.all()
     tag = None
 
     if tag_slug:
